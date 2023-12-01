@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Démarrage Workflow
-      run: echo "Démarrage du Workflow"
+      run: echo "Démarrage du Workflow sur ${{github.ref}}"
