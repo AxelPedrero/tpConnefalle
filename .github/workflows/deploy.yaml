@@ -11,5 +11,8 @@ jobs:
   deploy-env:
     runs-on: ubuntu-latest
     steps:
-    - name: Démarrage Workflow
-      run: echo "Démarrage du Workflow sur ${{github.ref}}"
+      - name: Démarrage Workflow
+        run: echo "Démarrage du Workflow sur ${{ github.ref }}"
+      - name: Récupération code
+        run: echo "Récupération code"
+        if: ${{ github.ref == 'refs/heads/main'}}
