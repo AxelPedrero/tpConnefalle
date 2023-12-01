@@ -1,4 +1,4 @@
-name: Déploiemehnt application
+name: Déploiement application
 on:
   workflow_dispatch:
     inputs:
@@ -14,5 +14,17 @@ jobs:
       - name: Démarrage Workflow
         run: echo "Démarrage du Workflow sur ${{ github.ref }}"
       - name: Récupération code
-        run: echo "Récupération code"
+        uses: actions/checkout@v2
         if: ${{ github.ref == 'refs/heads/main'}}
+      - name: Test de l'environnement
+        run: |
+          echo "Environnement de déploiement : ${{ github.event.inputs.server }}"
+          if [ "${{ github.event.inputs.server }}" == "dev" ]; then
+            echo "Test de l'environnement de développement"
+          elif [ "${{ github.event.inputs.server }}" == "qual" ]; then
+            echo "Test de l'environnement de qualification"
+          elif [ "${{ github.event.inputs.server }}" == "prod" ]; then
+            echo "Test de l'environnement de production"
+          else
+            echo "Environnement inconnu"
+          fi
